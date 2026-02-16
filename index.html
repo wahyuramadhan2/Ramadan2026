@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramadan Countdown 2026</title>
+<title>Ramadan Countdown 2026 🌙</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
@@ -26,31 +26,37 @@ body{
     background-size:cover;
     background-repeat:no-repeat;
     font-family:'Poppins',sans-serif;
-    overflow:hidden;
+    padding:20px;
 }
 
+/* VANTA */
 #vanta{
     position:absolute;
     width:100%;
-    height:100vh;
+    height:100%;
+    top:0;
+    left:0;
     z-index:0;
 }
 
+/* CONTAINER */
 .container{
     background:rgba(255,255,255,0.1);
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(15px);
     border-radius:20px;
     padding:2rem;
     text-align:center;
     position:relative;
     z-index:1;
-    width:600px;
-    max-width:90%;
+    width:100%;
+    max-width:650px;
     color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
+/* TITLE */
 .title{
-    font-size:2.5rem;
+    font-size:clamp(1.8rem,5vw,2.5rem);
     margin-bottom:2rem;
     position:relative;
 }
@@ -66,38 +72,63 @@ body{
     color:gold;
 }
 
+/* COUNTDOWN GRID */
 .countdown{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:1rem;
-    margin-bottom:2rem;
 }
 
+/* CARD */
 .countdown-item{
     background:rgba(255,255,255,0.15);
-    padding:1rem;
-    border-radius:12px;
+    border-radius:15px;
+    padding:1.2rem 0.5rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:120px; /* Biar semua sama tinggi */
+    overflow:hidden;
 }
 
+/* NUMBER */
 .number{
-    font-size:3rem;
+    font-size:clamp(1.8rem,5vw,2.8rem);
     font-weight:600;
+    white-space:nowrap;
 }
 
+/* LABEL */
 .label{
     font-size:0.9rem;
     opacity:0.8;
 }
 
+/* MESSAGE */
 .message{
-    margin-top:1rem;
+    margin-top:2rem;
     font-size:1.1rem;
 }
 
+/* MUSIC INFO */
 .music-info{
     margin-top:1rem;
     font-size:0.8rem;
     opacity:0.7;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+    .countdown{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width:480px){
+    .countdown{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -129,7 +160,7 @@ body{
     </div>
 
     <div class="message">
-        Ramadan akan tiba. InsyaAllah 19 Februari 2026 ✨
+        Ramadan akan tiba, insyaAllah 19 Februari 2026 ✨
     </div>
 
     <div class="music-info">
@@ -143,7 +174,7 @@ body{
 </audio>
 
 <script>
-// ===== VANTA BACKGROUND =====
+// VANTA BACKGROUND
 window.addEventListener("DOMContentLoaded", () => {
     VANTA.BIRDS({
         el: "#vanta",
@@ -156,7 +187,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ===== COUNTDOWN =====
+// COUNTDOWN
 function updateCountdown(){
     const ramadanDate = new Date('2026-02-19T00:00:00+07:00').getTime();
     const now = new Date().getTime();
@@ -186,11 +217,10 @@ function updateCountdown(){
 const countdownInterval = setInterval(updateCountdown,1000);
 updateCountdown();
 
-// ===== MUSIC CONTROL =====
+// MUSIC
 const music = document.getElementById("bgMusic");
 music.volume = 0.5;
 
-// Play after first click (browser policy safe)
 document.body.addEventListener("click",()=>{
     music.play();
 },{ once:true });
