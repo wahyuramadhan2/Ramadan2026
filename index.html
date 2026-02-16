@@ -22,36 +22,34 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:url('bg.png');
-    background-size:cover;
-    background-repeat:no-repeat;
+    background:url('bg.png') center/cover no-repeat;
     font-family:'Poppins',sans-serif;
     padding:20px;
 }
 
-/* VANTA */
+/* VANTA BACKGROUND */
 #vanta{
-    position:absolute;
-    width:100%;
-    height:100%;
+    position:fixed;
     top:0;
     left:0;
+    width:100%;
+    height:100%;
     z-index:0;
 }
 
-/* CONTAINER */
+/* GLASS CONTAINER */
 .container{
-    background:rgba(255,255,255,0.1);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:2rem;
-    text-align:center;
-    position:relative;
-    z-index:1;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    border-radius:24px;
+    padding:1.8rem;
     width:100%;
     max-width:650px;
+    text-align:center;
     color:white;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    position:relative;
+    z-index:1;
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
 }
 
 /* TITLE */
@@ -65,36 +63,36 @@ body{
     content:'رمضان';
     font-family:'Amiri',serif;
     position:absolute;
-    top:-20px;
-    right:-20px;
-    font-size:1.5rem;
+    top:-18px;
+    right:-18px;
+    font-size:1.4rem;
     opacity:0.6;
     color:gold;
 }
 
-/* COUNTDOWN GRID */
+/* GRID AUTO FIT (ANTI OVERFLOW) */
 .countdown{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1rem;
+    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:0.9rem;
 }
 
 /* CARD */
 .countdown-item{
     background:rgba(255,255,255,0.15);
-    border-radius:15px;
+    border-radius:16px;
     padding:1.2rem 0.5rem;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    min-height:120px; /* Biar semua sama tinggi */
+    min-height:120px;
     overflow:hidden;
 }
 
 /* NUMBER */
 .number{
-    font-size:clamp(1.8rem,5vw,2.8rem);
+    font-size:clamp(1.8rem,5vw,2.6rem);
     font-weight:600;
     white-space:nowrap;
 }
@@ -108,24 +106,18 @@ body{
 /* MESSAGE */
 .message{
     margin-top:2rem;
-    font-size:1.1rem;
+    font-size:1.05rem;
 }
 
 /* MUSIC INFO */
 .music-info{
     margin-top:1rem;
-    font-size:0.8rem;
+    font-size:0.85rem;
     opacity:0.7;
 }
 
-/* RESPONSIVE */
-@media (max-width:768px){
-    .countdown{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media (max-width:480px){
+/* EXTRA SMALL DEVICE FIX */
+@media (max-width:360px){
     .countdown{
         grid-template-columns:1fr;
     }
@@ -187,7 +179,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// COUNTDOWN
+// COUNTDOWN LOGIC
 function updateCountdown(){
     const ramadanDate = new Date('2026-02-19T00:00:00+07:00').getTime();
     const now = new Date().getTime();
@@ -217,7 +209,7 @@ function updateCountdown(){
 const countdownInterval = setInterval(updateCountdown,1000);
 updateCountdown();
 
-// MUSIC
+// MUSIC (Browser Safe)
 const music = document.getElementById("bgMusic");
 music.volume = 0.5;
 
